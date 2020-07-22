@@ -1,0 +1,42 @@
+
+
+.genre{
+   display: inline-flexbox !important;
+    flex-flow: nowrap;
+    gap: 0.5rem;
+    
+        
+   
+}
+
+.media-content{
+    padding-top: 0 !important;
+  }
+
+.movie-meta{
+    padding-right: 0 !important;
+}
+
+.media-content{
+    padding: 1rem;
+}
+h3{
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+.comma:not(:last-child):after {
+    content: ", ";
+  }
+
+ 
+ .rating{
+     float: right;
+     
+    
+ }
+ .star{
+     color: gold !important;
+ }
+
+ 

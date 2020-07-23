@@ -17,10 +17,9 @@ class App extends Component {
     render() {
         
         return (
-            <div className = "ui container">
+            <div className = "ui container" style = {{backgroundColor:'#4D4D4D'}}>
                 <BrowserRouter>
-                    <div  >
-                    
+                    <div  > 
                     <Header/>
                     <Switch>
                         <Route path = "/" exact component = {LandingPage}/>

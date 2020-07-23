@@ -9,7 +9,9 @@ const initialState = {
     movieBtnClick:true,
     tvBtnClick:false,
     singleMedia:{},
-    cast:[]
+    cast:[],
+    modal:false,
+    trailer:[]
 
 
 }
@@ -36,6 +38,15 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_CREDIT':
         return { ...state, cast:[...payload] };
 /******************************************************** */
+
+    case 'TRAILER_BTN_CLICK':
+        return { ...state, modal:!state.modal };
+
+/***************************************** */
+    case 'FETCH_TRAILER':
+        return { ...state, trailer:[...payload]};
+
+/************************************ */
 
     default:
         return state

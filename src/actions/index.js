@@ -3,7 +3,20 @@ import {movieDb} from '../api/movieDb'
 const api_key = '5ac6ab23fe284516bb2dfd4a4d6936fa'
 
 
+export const fetchVideo = (media_type, id) => {
+    
+    return async (dispatch) => {
 
+        const response = await movieDb.get(`/${media_type}/${id}/videos`,{
+            params: {
+                api_key:api_key
+            }
+        });
+        
+        dispatch({type: 'FETCH_TRAILER', payload: response.data.results})
+    }
+    
+};
 
 export const fetchSingleMedia = (media_type,id) => {
     
@@ -14,7 +27,7 @@ export const fetchSingleMedia = (media_type,id) => {
                 api_key:api_key
             }
         });
-        console.log(response.data)
+       
         dispatch({type: 'FETCH_SINGLE_MEDIA', payload: response.data})
     }
     
@@ -28,7 +41,7 @@ export const fetchCredit = (media_type,id) => {
                 api_key:api_key
             }
         });
-        console.log(response.data.cast)
+        
         dispatch({type: 'FETCH_CREDIT', payload: response.data.cast})
     }
 
@@ -105,3 +118,10 @@ export const onTvBtnClick = () => ({
     type: 'TV_BTN_CLICK',
     
 });
+export const openTrailerModal = () => ({
+    type: 'TRAILER_BTN_CLICK',
+    
+});
+
+
+

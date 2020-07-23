@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import {  fetchSingleMedia, fetchCredit  } from '../actions'
-import './MediaDetail.css'
+import './SingleMediaDetail.css'
 
-class MovieDetail extends Component {
+class SingleMediaDetail extends Component {
 
 
     	componentDidMount() {
-          const media_type =  this.props.mediaTypeMovie?"movie":"tv"
-            
+          const media_type =  this.props.match.path ==="/movie/:id/:slug"?"movie":"tv"
+         
           this.props.fetchSingleMedia(media_type, this.props.match.params.id)
           this.props.fetchCredit(media_type, this.props.match.params.id)
             
@@ -23,7 +23,7 @@ class MovieDetail extends Component {
             return `https://image.tmdb.org/t/p/w1920_and_h800_multi_faces${this.props.mediaDetail.backdrop_path}`
         }
         releaseYear = () => {
-            const x = this.props.mediaDetail.release_date;
+            const x = this.props.mediaDetail.release_date?this.props.mediaDetail.release_date:this.props.mediaDetail.first_air_date;
             if(x){
                 return (x.substring(0, 4)) 
             }
@@ -57,14 +57,23 @@ class MovieDetail extends Component {
          
     };
 
+    retreiveTitle = () => {
+        if (this.props.mediaDetail.title){
+            return this.props.mediaDetail.title;
+        }else {
+            return this.props.mediaDetail.original_name; 
+        }
+    }
+
+
     render() {
         return (
-            <div style = {{marginTop:'5rem'}}>
+            <div style = {{marginTop:'3rem'}}>
                 <div className="detail" 
-                    style ={{backgroundImage:`linear-gradient(to right bottom, rgba(70, 70, 70, 0.8),rgba(35, 35, 35, 0.8)),url(${this.backdropUrl()})`}}>
-                    <div className="poster"><img src={this.img_base_Url()} alt={this.props.mediaDetail.title}/></div>
+                    style ={{backgroundImage:`linear-gradient(to right bottom, rgba(50, 50, 50, 0.8),rgba(35, 35, 35, 0.8)),url(${this.backdropUrl()})`}}>
+                    <div className="poster"><img src={this.img_base_Url()} alt={this.retreiveTitle()}/></div>
                     <div className="more_detail">
-                        <h1>{this.props.mediaDetail.title} ({this.releaseYear()})</h1>
+                        <h1>{this.retreiveTitle()} ({this.releaseYear()})</h1>
                         <div className = "meta-data">
                             <div className="ui horizontal list">
                                {this.findGenre()} 
@@ -74,9 +83,8 @@ class MovieDetail extends Component {
                             <div className = {`ui ${this.checkRating()} label`}>
                                 <h4>{this.props.mediaDetail.vote_average}</h4>
                             </div>
-                            <button className = "ui inverted red button"><i class="play icon"></i>Play Trailer</button>
-                            <button className = "ui inverted red button"><i class="play icon"></i>Play Trailer</button>
-                            <button className = "ui inverted red button"><i class="play icon"></i>Play Trailer</button>
+                            <button className = "ui inverted red button"><i className="play icon"></i>Play Trailer</button>
+                            
                         </div>
                         <div>
                             <h2>Overview</h2>
@@ -98,4 +106,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {fetchSingleMedia, fetchCredit})(MovieDetail);
+export default connect(mapStateToProps, {fetchSingleMedia, fetchCredit})(SingleMediaDetail);

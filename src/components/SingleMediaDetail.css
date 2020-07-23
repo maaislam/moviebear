@@ -42,7 +42,9 @@ h1{
 .control-items{
     padding: 2rem 0;
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     
 }
-
+.control-items button{
+    margin-left: 5rem !important;
+}

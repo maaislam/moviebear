@@ -17,7 +17,7 @@ class App extends Component {
     render() {
         
         return (
-            <div className = "ui container" style = {{backgroundColor:'#4D4D4D'}}>
+            <div style = {{backgroundColor:'#1A202C'}}>
                 <BrowserRouter>
                     <div  > 
                     <Header/>

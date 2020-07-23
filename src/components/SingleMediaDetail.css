@@ -2,9 +2,8 @@
 
 .detail{
     width: 100vw;
-    height: 90vh;
+    height: 95vh;
     position: relative;
-    margin-left: -15rem;
     display: flex;
     color: white !important;
 }
@@ -15,16 +14,16 @@
 .poster{
     position: absolute;
     top: 60%;
-    left: 20%;
-    transform: translate(-20%,-60%);
+    left: 15%;
+    transform: translate(-15%,-60%);
 }
 
 .more_detail{
 
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 65%;
-    transform: translate(-65%,-40%);
+    transform: translate(-65%,-50%);
 
 }
 

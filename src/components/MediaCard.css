@@ -3,10 +3,16 @@
 .genre{
    display: inline-flexbox !important;
     flex-flow: nowrap;
-    gap: 0.5rem;
-    
-        
+    gap: 0.5rem;  
    
+}
+
+
+
+.media-card{
+    background-color: #1A202C !important;
+    color: white !important;
+    box-shadow: none !important;
 }
 
 .media-content{
@@ -20,9 +26,11 @@
 .media-content{
     padding: 1rem;
 }
+
 h3{
     margin-bottom: 0 !important;
-    margin-top: 0 !important;
+    margin-top: -1rem !important;
+    padding-bottom: 0.5rem !important;
 }
 
 .comma:not(:last-child):after {

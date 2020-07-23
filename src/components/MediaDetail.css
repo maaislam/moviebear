@@ -1,0 +1,48 @@
+
+
+.detail{
+    width: 100vw;
+    height: 90vh;
+    position: relative;
+    margin-left: -15rem;
+    display: flex;
+    color: white !important;
+}
+.poster img{
+    width: 300px;
+}
+
+.poster{
+    position: absolute;
+    top: 60%;
+    left: 20%;
+    transform: translate(-20%,-60%);
+}
+
+.more_detail{
+
+    position: absolute;
+    top: 40%;
+    left: 65%;
+    transform: translate(-65%,-40%);
+
+}
+
+h1{
+    font-size: 3rem !important;
+    margin-bottom: 0 !important;
+}
+
+.meta-data{
+    display: flex;
+    align-items: center;
+    justify-content: stretch;
+    
+}
+.control-items{
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+

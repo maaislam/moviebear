@@ -13,7 +13,7 @@ class MediaCard extends Component {
 
     findGenre = () => {
         
-                //console.log(this.props.genreArr)
+                console.log(this.props.genreArr)
                 return this.props.genreArr.map((item, index)=> {
                   const genre = this.props.fullGenreList.find(el => el.id===item);
                  return (
@@ -23,8 +23,6 @@ class MediaCard extends Component {
                  )  
                 
             });
-        
-       
     }
 
     checkRating = () => {

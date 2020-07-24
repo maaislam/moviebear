@@ -47,7 +47,7 @@ class LandingPage extends Component {
 
     render() {
         return (
-            <div className = "ui container" style = {{marginTop:'3rem'}}>
+            <div className = "ui container" style = {{marginTop:'4rem'}}>
                 <MediaList 
                     heading = {`Popular ${this.renderHeader()}`}
                     mediaList = {this.props.popular}

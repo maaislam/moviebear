@@ -137,5 +137,16 @@ export const onSubmit = (formValues) => ({
     
 });
 
+export const userSignedIn = () => ({
+    type: 'USER_SIGNED_IN',
+    
+    
+});
+export const userSignedOut = () => ({
+    type: 'USER_SIGNED_OUT',
+    
+    
+});
+
 
 

@@ -8,7 +8,7 @@ import SingleMediaDetail from './SingleMediaDetail'
 import Header from './Header'
 import LandingPage from './LandingPage';
 
-import Auth from './auth/Auth';
+
 
 class App extends Component {
 
@@ -28,7 +28,7 @@ class App extends Component {
                     </Switch>
                     </div>
                 </BrowserRouter>
-                <div><Auth/></div>
+                
             </div>
             );
     }

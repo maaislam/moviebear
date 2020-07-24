@@ -5,6 +5,7 @@ import TrailerModal from './TrailerModal';
 
 import {  Link  } from 'react-router-dom'
 import LogInForm from './auth/LogInForm';
+import Auth from './auth/Auth';
 
 class Header extends Component {
 
@@ -57,8 +58,8 @@ class Header extends Component {
                                 <i className="search link icon"></i>
                             </div>
                         </div>
-                        <div onClick = {this.props.openSigningModal} className="ui link item">
-                            Sign In
+                        <div  className="ui link item">
+                            <Auth/>
                         </div>
                     </div>
                 </div>

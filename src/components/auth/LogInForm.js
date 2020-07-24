@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 
-
 class LogInForm extends Component {
     
     
@@ -41,6 +40,10 @@ class LogInForm extends Component {
 
     };
 
+   googleSignInRequest = () => {
+       this.props.googleSignInRequest()
+   }
+
     render() {
         return (
             <div className= "ui centered card" >
@@ -51,7 +54,7 @@ class LogInForm extends Component {
                 <div className = "content">
                     <div className="ui one column grid center aligned">
                         <div className="row" >
-                             <button className="ui button google plus">Log in with Google</button>
+                             <button onClick = {this.googleSignInRequest} className="ui button google plus">Log in with Google</button>
                         </div>
                         <div className="row">
                              <button className="ui button facebook">Log in with Facebook</button>

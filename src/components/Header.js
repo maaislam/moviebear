@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {  onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit} from '../actions'
+import {  onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest} from '../actions'
 import TrailerModal from './TrailerModal';
 
 import {  Link  } from 'react-router-dom'
 import LogInForm from './auth/LogInForm';
 import Auth from './auth/Auth';
+import UserSnippet from './UserSnippet';
 
 class Header extends Component {
 
@@ -21,9 +22,16 @@ class Header extends Component {
         this.props.onSubmit(formValues)
     }
 
+    googleSignInRequest = () => {
+        this.props.googleSignInRequest()
+    }
+ 
+
     showSigningForm = () => {
         return <LogInForm 
-                onSubmit = {this.onSubmit}/>
+                onSubmit = {this.onSubmit}
+                googleSignInRequest = {this.googleSignInRequest}
+                />
     }
 
     showSigningModal = () => {
@@ -38,6 +46,15 @@ class Header extends Component {
                 return null
             }
     }
+    showUserSnippet = () =>{
+        if (this.props.isSignedIn){
+            return (
+            <UserSnippet name ={this.props.userName} userImg = {this.props.userImg}/>
+            )
+        }
+        
+    }
+
     render() {
         return (
                 <div className="ui inverted top fixed menu" style = {{padding: '0 2rem'}}>
@@ -58,7 +75,10 @@ class Header extends Component {
                                 <i className="search link icon"></i>
                             </div>
                         </div>
-                        <div  className="ui link item">
+                        <>
+                            {this.showUserSnippet()}
+                        </>
+                        <div  className="item">
                             <Auth/>
                         </div>
                     </div>
@@ -71,8 +91,11 @@ const mapStateToProps = (state) => {
     return {
         movieClick:state.movies.movieBtnClick,
         tvClick:state.movies.tvBtnClick,
-        modal:state.movies.modals.signingModal
+        modal:state.movies.modals.signingModal,
+        userName:state.auth.user.name,
+        userImg: state.auth.user.userImg,
+        isSignedIn:state.auth.isSignedIn
     }
 }
 
-export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit})(Header);
+export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest})(Header);

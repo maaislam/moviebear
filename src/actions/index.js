@@ -137,15 +137,18 @@ export const onSubmit = (formValues) => ({
     
 });
 
-export const userSignedIn = () => ({
+export const userSignedIn = (signedUser) => ({
     type: 'USER_SIGNED_IN',
-    
+    payload: signedUser
     
 });
 export const userSignedOut = () => ({
     type: 'USER_SIGNED_OUT',
     
     
+});
+export const googleSignInRequest = () => ({
+    type: 'G_SIGN_IN_REQ', 
 });
 
 

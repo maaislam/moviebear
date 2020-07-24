@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { userSignedIn, userSignedOut, openSigningModal} from '../../actions'
 
-import fire from './Fire'
+import {fire, provider} from './Fire'
 
 
 
@@ -24,9 +24,16 @@ class Auth extends Component {
 
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
+        console.log(user) 
 
-      this.props.userSignedIn();
-          console.log(user)  
+        var signedUser = {
+          name: user.displayName,
+          userImg:user.photoURL
+        }
+
+      this.props.userSignedIn(signedUser);
+
+           
           
 
         } else {
@@ -59,11 +66,17 @@ class Auth extends Component {
 
     loginUser = () => {
       if (this.props.userDetail){
-
+        //console.log(this.props.userDetail.email)
         fire.auth().signInWithEmailAndPassword(this.props.userDetail.email, this.props.userDetail.password).then((u)=>{
         }).catch((error) => {
-          console.log(error);
+          //console.log(error);
         });
+      } 
+      if (this.props.googleSignIn){
+          
+          fire.auth().signInWithRedirect(provider)
+
+          
       }
      
     }
@@ -87,7 +100,8 @@ const mapStateToProps = (state) => {
   return {
     
     userDetail: state.auth.userDetail,
-    isSignedIn: state.auth.isSignedIn
+    isSignedIn: state.auth.isSignedIn,
+    googleSignIn:state.auth.googleSignInReq
   }
 }
 

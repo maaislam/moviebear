@@ -37,7 +37,7 @@ class MediaCard extends Component {
 
 
     urlModifier = () => {
-        return  this.props.title.replaceAll(' ', '-');
+        return  this.props.title.split(' ').join('-');
         
            
 

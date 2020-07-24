@@ -153,6 +153,12 @@ export const googleSignInRequest = () => ({
 export const facebookSignInRequest = () => ({
     type: 'F_SIGN_IN_REQ', 
 });
+export const showSignInForm = () => ({
+    type: 'SHOW_SIGN_IN_FORM', 
+});
+export const showSignUpForm = () => ({
+    type: 'SHOW_SIGN_UP_FORM', 
+});
 
 
 

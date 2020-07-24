@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 
-class LogInForm extends Component {
+class SignUpForm extends Component {
     
     
     
@@ -49,10 +49,11 @@ class LogInForm extends Component {
                     <div className="ui raised segment">
                         
                         <form onSubmit = {this.props.handleSubmit(this.onSubmit)} className = "ui form error">
+
+                            <Field name = "name" type = "text" component = {this.renderInput} label = "Enter Your Name" className = "field"/>
                             <Field name = "email" type = "text" component = {this.renderInput} label = "Enter Email" className = "field"/>
                             <Field name = "password" type = "password" component = {this.renderInput} label = "Enter Password" className = "field"/>
-                            <button className="ui button primary">Sign In</button>
-                            
+                            <button className="ui button primary">Sign Up</button>
                         </form>
                     </div>
                 </div>
@@ -64,6 +65,9 @@ class LogInForm extends Component {
 const validate = (formValues) => {
     const errors = {}
 
+    if (!formValues.name) {
+        errors.name = 'You must enter your name'
+    }
     if (!formValues.email) {
         errors.email = 'You must enter a email'
     }
@@ -76,9 +80,9 @@ const validate = (formValues) => {
 
 
 export default reduxForm({
-    form:'LogInForm',
+    form:'SignUpForm',
     validate
-})(LogInForm);
+})(SignUpForm);
 
 
 

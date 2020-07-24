@@ -14,6 +14,9 @@ class Auth extends Component {
   componentDidMount(){
 
     this.authListener();
+
+
+    
     
   }
  /* componentDidUpdate() {
@@ -42,7 +45,7 @@ class Auth extends Component {
             }
           });
         
-    }
+    };
 
     renderLogInOutBtn = () => {
 

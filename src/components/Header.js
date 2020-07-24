@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {  onMovieBtnClick, onTvBtnClick  } from '../actions'
-import logo from '../assets/logo512.png'
+import {  onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit} from '../actions'
+import TrailerModal from './TrailerModal';
 
 import {  Link  } from 'react-router-dom'
+import LogInForm from './auth/LogInForm';
 
 class Header extends Component {
 
@@ -15,16 +16,34 @@ class Header extends Component {
         this.props.onTvBtnClick();
     }
 
+    onSubmit = (formValues) => {
+        this.props.onSubmit(formValues)
+    }
 
- 
+    showSigningForm = () => {
+        return <LogInForm 
+                onSubmit = {this.onSubmit}/>
+    }
 
-
+    showSigningModal = () => {
+            if (this.props.modal){
+                return (
+                    <TrailerModal 
+                        closeModal = {this.props.openSigningModal}
+                        content = {this.showSigningForm()}
+                        />
+                )
+            } else {
+                return null
+            }
+    }
     render() {
         return (
-                <div className="ui top fixed menu">
-                    <div className="item" >
-                        <img src={logo} alt="logo"/>
-                    </div>
+                <div className="ui inverted top fixed menu" style = {{padding: '0 2rem'}}>
+                    {this.showSigningModal()}
+                    <Link to = "/" className="item" >
+                        <i className = "big purple film icon"></i>
+                    </Link>
                     <Link  to = "/" className={`item link ${this.props.movieClick?'active':null}`} onClick = {this.onMovieBtnClick} >
                         Movies
                     </Link>
@@ -38,9 +57,9 @@ class Header extends Component {
                                 <i className="search link icon"></i>
                             </div>
                         </div>
-                        <a className="ui item" href="/">
+                        <div onClick = {this.props.openSigningModal} className="ui link item">
                             Sign In
-                        </a>
+                        </div>
                     </div>
                 </div>
         );
@@ -50,8 +69,9 @@ class Header extends Component {
 const mapStateToProps = (state) => {
     return {
         movieClick:state.movies.movieBtnClick,
-        tvClick:state.movies.tvBtnClick
+        tvClick:state.movies.tvBtnClick,
+        modal:state.movies.modals.signingModal
     }
 }
 
-export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick})(Header);
+export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit})(Header);

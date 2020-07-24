@@ -1,5 +1,9 @@
 import {movieDb} from '../api/movieDb'
 
+
+/**
+ * *learn ways to hide api key*
+ */
 const api_key = '5ac6ab23fe284516bb2dfd4a4d6936fa'
 
 
@@ -120,6 +124,16 @@ export const onTvBtnClick = () => ({
 });
 export const openTrailerModal = () => ({
     type: 'TRAILER_BTN_CLICK',
+    
+});
+export const openSigningModal = () => ({
+    type: 'SIGNIN_BTN_CLICK',
+    
+});
+
+export const onSubmit = (formValues) => ({
+    type: 'SIGNIN_REQUEST',
+    payload:formValues
     
 });
 

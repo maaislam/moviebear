@@ -10,7 +10,10 @@ const initialState = {
     tvBtnClick:false,
     singleMedia:{},
     cast:[],
-    modal:false,
+    modals:{
+        trailerModal:false,
+        signingModal:false
+    },
     trailer:[]
 
 
@@ -29,9 +32,9 @@ export default (state = initialState, { type, payload }) => {
         return { ...state, fullGenreList:[ ...payload] };
     /*************************************************************** */
     case 'MOVIE_BTN_CLICK':
-        return { ...state, movieBtnClick:true, tvBtnClick:false };
+        return { ...state, movieBtnClick:true, tvBtnClick:false, singleMedia:{} };
     case 'TV_BTN_CLICK':
-        return { ...state, movieBtnClick:false, tvBtnClick:true };
+        return { ...state, movieBtnClick:false, tvBtnClick:true, singleMedia:{} };
     /***************************************************************** */
     case 'FETCH_SINGLE_MEDIA':
         return { ...state, singleMedia:{...payload} };
@@ -40,7 +43,10 @@ export default (state = initialState, { type, payload }) => {
 /******************************************************** */
 
     case 'TRAILER_BTN_CLICK':
-        return { ...state, modal:!state.modal };
+        return { ...state, modals:{trailerModal:!state.modals.trailerModal} };
+    
+        case 'SIGNIN_BTN_CLICK':
+        return { ...state, modals:{signingModal:!state.modals.signingModal}  };
 
 /***************************************** */
     case 'FETCH_TRAILER':

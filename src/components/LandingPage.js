@@ -12,7 +12,7 @@ class LandingPage extends Component {
        //*call action creators to fetch movies or tv-shows//
 
        const media = this.props.showMediaList?'movie':'tv';
-       console.log(media)
+      
 
         this.props.fetchGenreList(media);
         this.props.fetchPopularMedia(media);
@@ -26,7 +26,7 @@ class LandingPage extends Component {
 
        if (prevProps.showMediaList !== this.props.showMediaList){
         const media = this.props.showMediaList?'movie':'tv';
-        console.log(media)
+        
  
          this.props.fetchGenreList(media);
          this.props.fetchPopularMedia(media);
@@ -52,10 +52,12 @@ class LandingPage extends Component {
                     heading = {`Popular ${this.renderHeader()}`}
                     mediaList = {this.props.popular}
                     fullGenreList = {this.props.fullGenreList}/>
+                    <hr/>
                 <MediaList 
                     heading = {`Now Playing ${this.renderHeader()}`}
                     mediaList = {this.props.nowPlaying}
                     fullGenreList = {this.props.fullGenreList}/>
+                     <hr/>  
                 <MediaList 
                     heading = {`Top Rated ${this.renderHeader()}`}
                     mediaList = {this.props.topRated}

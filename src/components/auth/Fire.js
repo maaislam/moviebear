@@ -1,6 +1,7 @@
 
 
 import firebase from 'firebase';
+
 const firebaseConfig = {
     apiKey: "AIzaSyBZtqNuJqglBRvPL1Zmg6n7_rdHyBD6_vw",
     authDomain: "moviebear-50388.firebaseapp.com",

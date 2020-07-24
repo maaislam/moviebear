@@ -71,7 +71,7 @@ class SingleMediaDetail extends Component {
 
     showTrailer = () => {
         
-        if (this.props.openModal){
+        if (this.props.modal){
             return (
                 <TrailerModal 
                     closeModal = {this.props.openTrailerModal}
@@ -130,7 +130,7 @@ const mapStateToProps = (state) => {
         mediaTypeMovie:state.movies.movieBtnClick,
         mediaDetail:state.movies.singleMedia,
         cast:state.movies.cast,
-        openModal:state.movies.modal,
+        modal:state.movies.modals.trailerModal,
         trailer:state.movies.trailer
     }
 }

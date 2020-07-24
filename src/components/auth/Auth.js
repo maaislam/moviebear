@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { userSignedIn, userSignedOut, openSigningModal} from '../../actions'
 
-import {fire, provider} from './Fire'
+import {fire, googleProvider, facebookProvider} from './Fire'
 
 
 
@@ -31,10 +31,7 @@ class Auth extends Component {
           userImg:user.photoURL
         }
 
-      this.props.userSignedIn(signedUser);
-
-           
-          
+        this.props.userSignedIn(signedUser);
 
         } else {
               // No user is signed in.
@@ -55,12 +52,14 @@ class Auth extends Component {
             Sign Out
           </button>
           )
-      } else if (!this.props.isSignedIn) {
+      } else if (this.props.isSignedIn===false) {
         return (
                 <button className = "ui primary button" onClick = {this.props.openSigningModal}>
                     Sign In
                 </button>
               )    
+      }else if (this.props.isSignedIn===null){
+       return <button className="ui primary loading button">Loading</button>
       }
     }
 
@@ -74,9 +73,11 @@ class Auth extends Component {
       } 
       if (this.props.googleSignIn){
           
-          fire.auth().signInWithRedirect(provider)
-
-          
+          fire.auth().signInWithRedirect(googleProvider);
+      }
+      if (this.props.facebookSignIn){
+          console.log('reached')
+          fire.auth().signInWithRedirect(facebookProvider);
       }
      
     }
@@ -101,7 +102,8 @@ const mapStateToProps = (state) => {
     
     userDetail: state.auth.userDetail,
     isSignedIn: state.auth.isSignedIn,
-    googleSignIn:state.auth.googleSignInReq
+    googleSignIn:state.auth.googleSignInReq,
+    facebookSignIn:state.auth.facebookSignInReq
   }
 }
 

@@ -150,6 +150,9 @@ export const userSignedOut = () => ({
 export const googleSignInRequest = () => ({
     type: 'G_SIGN_IN_REQ', 
 });
+export const facebookSignInRequest = () => ({
+    type: 'F_SIGN_IN_REQ', 
+});
 
 
 

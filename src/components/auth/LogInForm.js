@@ -40,9 +40,12 @@ class LogInForm extends Component {
 
     };
 
-   googleSignInRequest = () => {
+    googleSignInRequest = () => {
        this.props.googleSignInRequest()
-   }
+    }
+    facebookSignInRequest = () => {
+       this.props.facebookSignInRequest()
+    }
 
     render() {
         return (
@@ -57,7 +60,7 @@ class LogInForm extends Component {
                              <button onClick = {this.googleSignInRequest} className="ui button google plus">Log in with Google</button>
                         </div>
                         <div className="row">
-                             <button className="ui button facebook">Log in with Facebook</button>
+                             <button onClick = {this.facebookSignInRequest} className="ui button facebook">Log in with Facebook</button>
                         </div>
                     </div>
                 </div>

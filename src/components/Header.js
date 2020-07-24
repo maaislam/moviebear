@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import {  onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest} from '../actions'
+import {  onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest, facebookSignInRequest} from '../actions'
 import TrailerModal from './TrailerModal';
 
 import {  Link  } from 'react-router-dom'
@@ -25,12 +25,16 @@ class Header extends Component {
     googleSignInRequest = () => {
         this.props.googleSignInRequest()
     }
+    facebookSignInRequest = () => {
+        this.props.facebookSignInRequest()
+    }
  
 
     showSigningForm = () => {
         return <LogInForm 
                 onSubmit = {this.onSubmit}
                 googleSignInRequest = {this.googleSignInRequest}
+                facebookSignInRequest = {this.facebookSignInRequest}
                 />
     }
 
@@ -98,4 +102,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest})(Header);
+export default connect(mapStateToProps, {onMovieBtnClick, onTvBtnClick, openSigningModal, onSubmit, googleSignInRequest, facebookSignInRequest})(Header);

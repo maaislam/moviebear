@@ -10,7 +10,8 @@ import {
     facebookSignInRequest,
     showSignInForm,
     showSignUpForm,
-    searchMedia} from '../actions';
+    searchMedia,
+    searchRequest} from '../actions';
 
 
 
@@ -29,6 +30,7 @@ class Header extends Component {
    
     onMovieBtnClick = () => {
         this.props.onMovieBtnClick();
+        
     }
     onTvBtnClick = () => {
         this.props.onTvBtnClick();
@@ -114,9 +116,9 @@ class Header extends Component {
         if (this.props.movieClick){
            
             this.props.searchMedia('movie', formValues)
-            
+            this.props.searchRequest()
         }else if (this.props.tvClick){
-        
+            this.props.searchRequest()
             this.props.searchMedia('tv', formValues)
         }
     }
@@ -174,4 +176,5 @@ export default connect(mapStateToProps, {
     facebookSignInRequest,
     showSignInForm,
     showSignUpForm,
-    searchMedia})(Header);
+    searchMedia,
+    searchRequest})(Header);

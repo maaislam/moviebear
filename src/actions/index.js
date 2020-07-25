@@ -182,6 +182,9 @@ export const showSignInForm = () => ({
 export const showSignUpForm = () => ({
     type: 'SHOW_SIGN_UP_FORM', 
 });
+export const searchRequest = () => ({
+    type: 'SEARCH_REQUEST', 
+});
 
 
 

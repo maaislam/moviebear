@@ -11,20 +11,25 @@ class LandingPage extends Component {
    componentDidMount() {
        //*call action creators to fetch movies or tv-shows//
 
-       const media = this.props.showMediaList?'movie':'tv';
+       
       
-        
+       
+
+            const media = this.props.showMediaList?'movie':'tv';
+
         this.props.fetchGenreList(media);
         this.props.fetchPopularMedia(media);
         this.props.fetchNowPlayingMedia(media);
         this.props.fetchTopRatedMedia(media);
 
+        
+        
    }
 
    componentDidUpdate(prevProps) {
        //*call action creators to fetch movies or tv-shows//
 
-       if (prevProps.showMediaList !== this.props.showMediaList){
+       if ((prevProps.showMediaList !== this.props.showMediaList) ){
         const media = this.props.showMediaList?'movie':'tv';
         
  
@@ -46,14 +51,16 @@ class LandingPage extends Component {
    }
 
    renderList = () => {
-       if (this.props.searchResult.length > 0){
+       if ( this.props.searchRequest){
         return (
                 <MediaList 
                     heading = {`${this.renderHeader()} Search Result`}
                     mediaList = {this.props.searchResult}
                     fullGenreList = {this.props.fullGenreList}/>
         )
-       }else if (this.props.searchResult.length===0){
+       }
+       
+       else if (!this.props.searchRequest){
         return (
             <>
                 <MediaList 

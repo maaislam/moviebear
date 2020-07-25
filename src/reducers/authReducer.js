@@ -32,6 +32,10 @@ export default (state = initialState, { type, payload }) => {
     case 'SHOW_SIGN_UP_FORM':
         return { ...state, signInForm:false, signUpForm:true}
 
+
+    case 'SIGNIN_BTN_CLICK':
+        return { ...state, signInForm:true, signUpForm:false   };
+
     default:
         return state
     }

@@ -7,7 +7,7 @@ const initialState = {
     nowPlaying:[],
     fullGenreList:[],
     searchResult:[],
-    searchRequest:false,
+    
     movieBtnClick:true,
     tvBtnClick:false,
     singleMedia:{},
@@ -36,18 +36,18 @@ export default (state = initialState, { type, payload }) => {
 
 
     case 'MEDIA_SEARCH':
-        return { ...state, searchResult:[ ...payload] };
+        return { ...state, searchResult:[ ...payload], searchRequest:true};
 
     /************************************************************* */
     case 'MOVIE_BTN_CLICK':
         return { ...state, movieBtnClick:true, tvBtnClick:false, singleMedia:{}, searchResult:[], searchRequest:false };
     case 'TV_BTN_CLICK':
-        return { ...state, movieBtnClick:false, tvBtnClick:true, singleMedia:{}, searchResult:[], searchRequest:false };
+        return { ...state, movieBtnClick:false, tvBtnClick:true, singleMedia:{}, searchResult:[],  searchRequest:false};
     /***************************************************************** */
     case 'FETCH_SINGLE_MEDIA':
-        return { ...state, singleMedia:{...payload} };
+        return { ...state, singleMedia:{...payload}, searchRequest:false  };
     case 'FETCH_CREDIT':
-        return { ...state, cast:[...payload] };
+        return { ...state, cast:[...payload], searchRequest:false };
 /******************************************************** */
 
     case 'TRAILER_BTN_CLICK':

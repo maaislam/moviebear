@@ -59,20 +59,24 @@ class Header extends Component {
             <>
                 <div className= "ui centered card" >
                     <div className="ui menu">
-                        <div onClick = {this.showSignInForm} className="item active">Sign In</div>
-                        <div onClick = {this.showSignUpForm} className="item">Sign Up</div>
+                        <div onClick = {this.showSignInForm} className={`item ${this.props.signInForm?'active':''}`}>Sign In</div>
+                        <div onClick = {this.showSignUpForm} className={`item ${this.props.signUpForm?'active':''}`}>Sign Up</div>
                     </div>
                     <SocialLogIn  
                         googleSignInRequest = {this.googleSignInRequest}
                         facebookSignInRequest = {this.facebookSignInRequest}/>
                     {
-                    this.props.signInForm?
+                    this.props.signInForm 
+                    
+                    ?
                     
                     <LogInForm 
                         onSubmit = {this.onSubmit}/>
                     :
 
-                    <SignUpForm/>
+                    <SignUpForm
+                        onSubmit = {this.onSubmit}
+                    />
                     }
                 </div> 
             </>
@@ -82,6 +86,7 @@ class Header extends Component {
 
     showSigningModal = () => {
             if (this.props.modal){
+                
                 return (
                     <TrailerModal 
                         closeModal = {this.props.openSigningModal}
@@ -89,6 +94,7 @@ class Header extends Component {
                         />
                 )
             } else {
+               // this.props.showSignInForm()
                 return null
             }
     }

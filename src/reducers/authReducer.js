@@ -2,6 +2,7 @@
 
 const initialState = {
     userDetail:{
+        name:'',
         email:'',
         password:''
     },
@@ -19,7 +20,7 @@ export default (state = initialState, { type, payload }) => {
     case 'SIGNIN_REQUEST':
         return { ...state, userDetail:{...payload}}
     case 'USER_SIGNED_IN':
-        return { ...state, userDetail:{email:'', password:''}, isSignedIn:true, googleSignInReq:false, facebookSignInReq:false, user:{...payload}}
+        return { ...state,  isSignedIn:true, googleSignInReq:false, facebookSignInReq:false, user:{...payload}}
     case 'USER_SIGNED_OUT':
         return { ...state, userDetail:{email:'', password:''}, isSignedIn:false, googleSignInReq:false, facebookSignInReq:false, user:{}}
     case 'G_SIGN_IN_REQ':

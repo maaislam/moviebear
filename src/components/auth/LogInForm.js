@@ -36,7 +36,7 @@ class LogInForm extends Component {
     
     onSubmit = (formValues) => {
        this.props.onSubmit(formValues)
-       console.log(formValues)
+      
 
     };
 

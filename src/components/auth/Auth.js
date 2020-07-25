@@ -14,29 +14,24 @@ class Auth extends Component {
   componentDidMount(){
 
     this.authListener();
-
-
-    
-    
+ 
   }
- /* componentDidUpdate() {
-    this.authListener();
-  }*/
-
+ 
+ 
     authListener = () => {
 
     fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        console.log(user) 
-
+      if (user ) {
+        
+        //console.log(user)
         var signedUser = {
           name: user.displayName,
           userImg:user.photoURL
         }
 
         this.props.userSignedIn(signedUser);
-
-        } else {
+        } 
+        else {
               // No user is signed in.
 
               this.props.userSignedOut();
@@ -67,11 +62,11 @@ class Auth extends Component {
     }
 
     loginUser = () => {
-      if (this.props.userDetail){
+      if (!this.props.userDetail.name && this.props.userDetail.email!=='' && this.props.userDetail.password!==''){
         //console.log(this.props.userDetail.email)
         fire.auth().signInWithEmailAndPassword(this.props.userDetail.email, this.props.userDetail.password).then((u)=>{
         }).catch((error) => {
-          //console.log(error);
+          console.log(error);
         });
       } 
       if (this.props.googleSignIn){
@@ -84,6 +79,33 @@ class Auth extends Component {
       }
      
     }
+
+    signUpUser = () => {
+
+      if (this.props.userDetail.name!=='' && this.props.userDetail.email!=='' && this.props.userDetail.password!==''){
+        fire.auth().createUserWithEmailAndPassword(this.props.userDetail.email, this.props.userDetail.password).then(()=>{
+          
+          var user = fire.auth().currentUser;
+            
+              user.updateProfile({
+                displayName: this.props.userDetail.name
+                
+              }).then(()=>{
+                this.authListener();
+              })
+
+        })
+        .catch(function(error) {
+          // Handle Errors here.
+          //var errorCode = error.code;
+          //var errorMessage = error.message;
+          // ...
+        });
+
+      }
+
+    }
+
     logout() {
       fire.auth().signOut();
 
@@ -93,6 +115,7 @@ class Auth extends Component {
         return (
             <div>
                 {this.loginUser()}
+                {this.signUpUser()}
                 {this.renderLogInOutBtn()}
             </div>
         );

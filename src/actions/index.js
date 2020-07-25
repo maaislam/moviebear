@@ -20,7 +20,7 @@ export const searchMedia = (mediaType, formValues) => {
             }
         });
         console.log(response)
-        dispatch({type: 'MEDIA_SEARCH', payload: response.data})
+        dispatch({type: 'MEDIA_SEARCH', payload: response.data.results})
     }
     
 };

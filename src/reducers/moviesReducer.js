@@ -6,6 +6,8 @@ const initialState = {
     topRated:[],
     nowPlaying:[],
     fullGenreList:[],
+    searchResult:[],
+    searchRequest:false,
     movieBtnClick:true,
     tvBtnClick:false,
     singleMedia:{},
@@ -31,10 +33,16 @@ export default (state = initialState, { type, payload }) => {
     case 'GENRE_List':
         return { ...state, fullGenreList:[ ...payload] };
     /*************************************************************** */
+
+
+    case 'MEDIA_SEARCH':
+        return { ...state, searchResult:[ ...payload] };
+
+    /************************************************************* */
     case 'MOVIE_BTN_CLICK':
-        return { ...state, movieBtnClick:true, tvBtnClick:false, singleMedia:{} };
+        return { ...state, movieBtnClick:true, tvBtnClick:false, singleMedia:{}, searchResult:[], searchRequest:false };
     case 'TV_BTN_CLICK':
-        return { ...state, movieBtnClick:false, tvBtnClick:true, singleMedia:{} };
+        return { ...state, movieBtnClick:false, tvBtnClick:true, singleMedia:{}, searchResult:[], searchRequest:false };
     /***************************************************************** */
     case 'FETCH_SINGLE_MEDIA':
         return { ...state, singleMedia:{...payload} };

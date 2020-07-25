@@ -13,7 +13,7 @@ class LandingPage extends Component {
 
        const media = this.props.showMediaList?'movie':'tv';
       
-
+        
         this.props.fetchGenreList(media);
         this.props.fetchPopularMedia(media);
         this.props.fetchNowPlayingMedia(media);
@@ -21,7 +21,7 @@ class LandingPage extends Component {
 
    }
 
-   componentDidUpdate(prevProps, prevState) {
+   componentDidUpdate(prevProps) {
        //*call action creators to fetch movies or tv-shows//
 
        if (prevProps.showMediaList !== this.props.showMediaList){
@@ -45,9 +45,17 @@ class LandingPage extends Component {
        }
    }
 
-    render() {
+   renderList = () => {
+       if (this.props.searchResult.length > 0){
         return (
-            <div className = "ui container" style = {{marginTop:'4rem'}}>
+                <MediaList 
+                    heading = {`${this.renderHeader()} Search Result`}
+                    mediaList = {this.props.searchResult}
+                    fullGenreList = {this.props.fullGenreList}/>
+        )
+       }else if (this.props.searchResult.length===0){
+        return (
+            <>
                 <MediaList 
                     heading = {`Popular ${this.renderHeader()}`}
                     mediaList = {this.props.popular}
@@ -62,6 +70,16 @@ class LandingPage extends Component {
                     heading = {`Top Rated ${this.renderHeader()}`}
                     mediaList = {this.props.topRated}
                     fullGenreList = {this.props.fullGenreList}/>
+            </>
+        )
+       }
+   }
+
+
+    render() {
+        return (
+            <div className = "ui container" style = {{marginTop:'4rem'}}>
+                {this.renderList()}
             </div>
         );
     }
@@ -69,13 +87,15 @@ class LandingPage extends Component {
 
 
 const mapStateToProps = (state) => {
-   
+    
     return {
       popular:state.movies.popular,
       nowPlaying:state.movies.nowPlaying,
       topRated:state.movies.nowPlaying,
       fullGenreList: state.movies.fullGenreList,
-      showMediaList: state.movies.movieBtnClick
+      showMediaList: state.movies.movieBtnClick,
+      searchResult: state.movies.searchResult,
+      searchRequest:state.movies.searchRequest
     }
 };
 

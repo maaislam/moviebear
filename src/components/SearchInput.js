@@ -33,7 +33,7 @@ class SearchInput extends Component {
     onSubmit = (formValues) => {
         this.props.onSearchSubmit(formValues)
        // console.log(formValues)
- 
+        
      };
  
 

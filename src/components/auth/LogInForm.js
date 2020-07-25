@@ -51,7 +51,7 @@ class LogInForm extends Component {
                         <form onSubmit = {this.props.handleSubmit(this.onSubmit)} className = "ui form error">
                             <Field name = "email" type = "text" component = {this.renderInput} label = "Enter Email" className = "field"/>
                             <Field name = "password" type = "password" component = {this.renderInput} label = "Enter Password" className = "field"/>
-                            <button className="ui button primary">Sign In</button>
+                            <button className="ui fluid button primary">Sign In</button>
                             
                         </form>
                     </div>

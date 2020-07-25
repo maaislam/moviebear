@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { userSignedIn, userSignedOut, openSigningModal} from '../../actions'
+import { userSignedIn, userSignedOut, toggleSigningModal} from '../../actions'
 
 import {fire, googleProvider, facebookProvider} from './Fire'
 
@@ -52,7 +52,7 @@ class Auth extends Component {
           )
       } else if (this.props.isSignedIn===false) {
         return (
-                <button className = "ui primary button" onClick = {this.props.openSigningModal}>
+                <button className = "ui primary button" onClick = {this.props.toggleSigningModal}>
                     Sign In
                 </button>
               )    
@@ -65,7 +65,12 @@ class Auth extends Component {
       if (!this.props.userDetail.name && this.props.userDetail.email!=='' && this.props.userDetail.password!==''){
         //console.log(this.props.userDetail.email)
         fire.auth().signInWithEmailAndPassword(this.props.userDetail.email, this.props.userDetail.password).then((u)=>{
-        }).catch((error) => {
+          if (this.props.signInModal){
+            this.props.toggleSigningModal()
+          }
+        })
+        
+        .catch((error) => {
           console.log(error);
         });
       } 
@@ -84,7 +89,7 @@ class Auth extends Component {
 
       if (this.props.userDetail.name!=='' && this.props.userDetail.email!=='' && this.props.userDetail.password!==''){
         fire.auth().createUserWithEmailAndPassword(this.props.userDetail.email, this.props.userDetail.password).then(()=>{
-          
+         
           var user = fire.auth().currentUser;
             
               user.updateProfile({
@@ -92,6 +97,9 @@ class Auth extends Component {
                 
               }).then(()=>{
                 this.authListener();
+                if (this.props.signInModal){
+                  this.props.toggleSigningModal()
+                }
               })
 
         })
@@ -129,8 +137,9 @@ const mapStateToProps = (state) => {
     userDetail: state.auth.userDetail,
     isSignedIn: state.auth.isSignedIn,
     googleSignIn:state.auth.googleSignInReq,
-    facebookSignIn:state.auth.facebookSignInReq
+    facebookSignIn:state.auth.facebookSignInReq,
+    signInModal:state.movies.modals.signingModal
   }
 }
 
-export default connect(mapStateToProps,{ userSignedIn, userSignedOut, openSigningModal})(Auth);
+export default connect(mapStateToProps,{ userSignedIn, userSignedOut, toggleSigningModal})(Auth);

@@ -7,6 +7,29 @@ import {movieDb} from '../api/movieDb'
 const api_key = '5ac6ab23fe284516bb2dfd4a4d6936fa'
 
 
+export const searchMedia = (mediaType, formValues) => {
+    
+    return async (dispatch) => {
+
+        const response = await movieDb.get(`/search/${mediaType}`,{
+            params:{
+                api_key:api_key,
+                query:formValues.search,
+                page:1
+                
+            }
+        });
+        console.log(response)
+        dispatch({type: 'MEDIA_SEARCH', payload: response.data})
+    }
+    
+};
+
+
+
+
+
+
 export const fetchVideo = (media_type, id) => {
     
     return async (dispatch) => {
@@ -126,7 +149,7 @@ export const openTrailerModal = () => ({
     type: 'TRAILER_BTN_CLICK',
     
 });
-export const openSigningModal = () => ({
+export const toggleSigningModal = () => ({
     type: 'SIGNIN_BTN_CLICK',
     
 });

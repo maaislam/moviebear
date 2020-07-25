@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import {  
     onMovieBtnClick, 
     onTvBtnClick, 
-    openSigningModal, 
+    toggleSigningModal, 
     onSubmit, 
     googleSignInRequest, 
     facebookSignInRequest,
     showSignInForm,
-    showSignUpForm} from '../actions';
+    showSignUpForm,
+    searchMedia} from '../actions';
 
 
 
@@ -21,6 +22,7 @@ import Auth from './auth/Auth';
 import UserSnippet from './UserSnippet';
 import SocialLogIn from './SocialLogIn';
 import SignUpForm from './auth/SignUpForm';
+import SearchInput from './SearchInput';
 
 class Header extends Component {
 
@@ -89,7 +91,7 @@ class Header extends Component {
                 
                 return (
                     <TrailerModal 
-                        closeModal = {this.props.openSigningModal}
+                        closeModal = {this.props.toggleSigningModal}
                         content = {this.showSigningForm()}
                         />
                 )
@@ -107,6 +109,18 @@ class Header extends Component {
         
     }
 
+    searchMovieAndTv = (formValues) => {
+       
+        if (this.props.movieClick){
+           
+            this.props.searchMedia('movie', formValues)
+            
+        }else if (this.props.tvClick){
+        
+            this.props.searchMedia('tv', formValues)
+        }
+    }
+
     render() {
         return (
                 <div className="ui inverted top fixed menu" style = {{padding: '0 2rem'}}>
@@ -122,10 +136,9 @@ class Header extends Component {
                     </Link>
                     <div className="right menu">
                         <div className="item">
-                            <div className="ui icon input">
-                                <input type="text" placeholder="Search..."/>
-                                <i className="search link icon"></i>
-                            </div>
+                            <SearchInput 
+                                rederPlaceholder = {this.props.movieClick?'Search Movies':'Search TV Shows'}
+                                onSearchSubmit = {this.searchMovieAndTv}/>
                         </div>
                         <>
                             {this.showUserSnippet()}
@@ -155,9 +168,10 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     onMovieBtnClick, 
     onTvBtnClick, 
-    openSigningModal, 
+    toggleSigningModal, 
     onSubmit, 
     googleSignInRequest, 
     facebookSignInRequest,
     showSignInForm,
-    showSignUpForm})(Header);
+    showSignUpForm,
+    searchMedia})(Header);

@@ -53,7 +53,7 @@ class SignUpForm extends Component {
                             <Field name = "name" type = "text" component = {this.renderInput} label = "Enter Your Name" className = "field"/>
                             <Field name = "email" type = "text" component = {this.renderInput} label = "Enter Email" className = "field"/>
                             <Field name = "password" type = "password" component = {this.renderInput} label = "Enter Password" className = "field"/>
-                            <button className="ui button primary">Sign Up</button>
+                            <button className="ui fluid button primary">Sign Up</button>
                         </form>
                     </div>
                 </div>

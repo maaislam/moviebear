@@ -9,7 +9,7 @@ class CastList extends Component {
     
 
     renderList = () => {
-        return this.props.castList.slice(0, 5).map((castListItem) => {
+        return this.props.castList.slice(0, 10).map((castListItem) => {
             return (
                 <CastListItem
                     castName = {castListItem.name}
@@ -25,7 +25,7 @@ class CastList extends Component {
         return (
             <div>
                 <div className="ui inverted header cast">
-                    <h2>Top Billed Cast Members</h2>
+                    <h2>Top Billed Cast</h2>
                 </div>
                 <div className = "ui link cards castList">
                     {this.renderList()}

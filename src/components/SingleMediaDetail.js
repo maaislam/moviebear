@@ -15,8 +15,18 @@ class SingleMediaDetail extends Component {
         this.props.fetchSingleMedia(media_type, this.props.match.params.id)
         this.props.fetchCredit(media_type, this.props.match.params.id)
         this.props.fetchVideo(media_type, this.props.match.params.id)
+        window.scrollTo(0, 0);
             
     }
+
+    componentDidUpdate(prevProps) {
+        if (
+          this.props.location.pathname !== prevProps.location.pathname
+        ) {
+          window.scrollTo(0, 0);
+        }
+      }
+
 
     img_base_Url = () => {
         return `https://image.tmdb.org/t/p/w500${this.props.mediaDetail.poster_path}`
@@ -111,6 +121,8 @@ class SingleMediaDetail extends Component {
                                 <h4>{this.props.mediaDetail.vote_average}</h4>
                             </div>
                             <button onClick={this.props.openTrailerModal} className = "ui inverted red button"><i className="play icon"></i>Play Trailer</button>
+                            <button  className = "ui inverted orange button"><i className="heart icon"></i>Add to favourite</button>
+                            <button  className = "ui inverted olive button"><i className="check icon"></i>Add to Watched List</button>
                             
                         </div>
                         <div>

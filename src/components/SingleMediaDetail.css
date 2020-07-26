@@ -24,6 +24,7 @@
     top: 50%;
     left: 65%;
     transform: translate(-65%,-50%);
+    margin-right: -5rem;
 
 }
 
@@ -41,9 +42,6 @@ h1{
 .control-items{
     padding: 2rem 0;
     display: flex;
-    /*justify-content: space-between;*/
+    justify-content: space-between;
     
-}
-.control-items button{
-    margin-left: 5rem !important;
 }

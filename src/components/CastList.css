@@ -1,0 +1,17 @@
+
+
+
+.castList{
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin-top: 2rem !important;
+    gap: 2rem;
+    padding: 0rem 10rem !important;
+    padding-top: 2rem !important;
+}
+
+.cast{
+    margin-top: 2.6rem !important;
+    padding: 2rem 10rem 0rem 10rem !important;
+   
+}

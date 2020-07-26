@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import {  fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo  } from '../actions'
 import './SingleMediaDetail.css'
 import TrailerModal from './TrailerModal';
+import CastList from './CastList'
 
 class SingleMediaDetail extends Component {
 
@@ -84,7 +85,7 @@ class SingleMediaDetail extends Component {
     }
 
     renderIframe = () => {
-        //console.log(this.props.trailerId[0].key)
+        
         return (
             
             <iframe title = "trailer" width="950" height="540" src={`https://www.youtube.com/embed/${this.props.trailer[0].key}`} frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen/>
@@ -118,18 +119,23 @@ class SingleMediaDetail extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="cast"></div>
+                <>
+                    <CastList 
+                        castList = {this.props.castList}
+                    />
+                </>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    
+       
+
     return {
         mediaTypeMovie:state.movies.movieBtnClick,
         mediaDetail:state.movies.singleMedia,
-        cast:state.movies.cast,
+        castList: state.movies.castList,
         modal:state.movies.modals.trailerModal,
         trailer:state.movies.trailer
     }

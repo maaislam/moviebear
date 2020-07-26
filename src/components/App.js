@@ -20,7 +20,7 @@ class App extends Component {
             <div style = {{backgroundColor:'#1A202C'}}>
                 <Router history = {history}>
                     <> 
-                    <Header/>
+                    <Header />
                     <Switch>
                         <Route path = "/" exact component = {LandingPage}/>
                         <Route path = "/movie/:id/:slug" exact component = {SingleMediaDetail}/>

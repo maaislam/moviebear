@@ -127,19 +127,19 @@ class Header extends Component {
 
     render() {
         return (
-                
-                <div className="ui mini inverted top fixed menu" >
+           
+                <div className="ui top fixed inverted mini menu"  >
                     {this.showSigningModal()}
-                    <Link to = "/" className="item" >
-                        <i className = "big purple film icon"></i>
+                    <Link to = "/" className="item" style = {{marginRight:'3rem'}}>
+                        <i className = "huge white film icon"/><div className="ui inverted header"><h3 style = {{marginTop:'-1.7rem'}}>Moviebear</h3></div>
                     </Link>
-                    <Link  to = "/" className={` blue item ${this.props.movieClick?'active':null}`} onClick = {this.onMovieBtnClick} style ={{fontSize:'1.2rem'}}>
-                         All Movies
+                    <Link  to = "/" className={`item blue ${this.props.movieClick?'active':null}`} onClick = {this.onMovieBtnClick} style ={{marginBottom:'1rem', marginTop:'1rem'}}>
+                    <div className="ui inverted header"><h5>Movies</h5></div>
                     </Link>
-                    <Link to = "/" className={`blue item  ${this.props.tvClick?'active':null}`} onClick = {this.onTvBtnClick} style ={{fontSize:'1.2rem'}} >
-                        All TV Shows
+                    <Link to = "/" className={`item blue ${this.props.tvClick?'active':null}`} onClick = {this.onTvBtnClick} style ={{marginBottom:'1rem' , marginTop:'1rem'}} >
+                        <div className="ui inverted header"><h5>TV Shows</h5></div>
                     </Link>
-                    <div className="right menu">
+                    <div className="right menu"  >
                         <div className="item">
                             <SearchInput 
                                 rederPlaceholder = {this.props.movieClick?'Search Movies':'Search TV Shows'}
@@ -153,6 +153,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
+                
         );
     }
 }

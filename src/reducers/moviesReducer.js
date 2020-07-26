@@ -7,11 +7,10 @@ const initialState = {
     nowPlaying:[],
     fullGenreList:[],
     searchResult:[],
-    
     movieBtnClick:true,
     tvBtnClick:false,
     singleMedia:{},
-    cast:[],
+    castList:[],
     modals:{
         trailerModal:false,
         signingModal:false
@@ -47,7 +46,7 @@ export default (state = initialState, { type, payload }) => {
     case 'FETCH_SINGLE_MEDIA':
         return { ...state, singleMedia:{...payload}, searchRequest:false  };
     case 'FETCH_CREDIT':
-        return { ...state, cast:[...payload], searchRequest:false };
+        return { ...state, castList:[...payload], searchRequest:false };
 /******************************************************** */
 
     case 'TRAILER_BTN_CLICK':

@@ -7,7 +7,7 @@ import './MediaCard.css'
 class MediaCard extends Component {
 
     img_base_Url = () => {
-        return `https://image.tmdb.org/t/p/w500${this.props.poster_path}`
+        return `https://image.tmdb.org/t/p/w300${this.props.poster_path}`
     }
 
 

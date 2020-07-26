@@ -1,5 +1,5 @@
 import {movieDb} from '../api/movieDb'
-
+import history from '../history'
 
 /**
  * *learn ways to hide api key*
@@ -19,8 +19,10 @@ export const searchMedia = (mediaType, formValues) => {
                 
             }
         });
-        console.log(response)
+        
         dispatch({type: 'MEDIA_SEARCH', payload: response.data.results})
+        history.push('/');
+       
     }
     
 };
@@ -182,9 +184,12 @@ export const showSignInForm = () => ({
 export const showSignUpForm = () => ({
     type: 'SHOW_SIGN_UP_FORM', 
 });
-export const searchRequest = () => ({
-    type: 'SEARCH_REQUEST', 
-});
+export const searchRequest = () => {
+    
+    return {
+        type: 'SEARCH_REQUEST'
+    }
+}
 
 
 

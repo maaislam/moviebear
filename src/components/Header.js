@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
 import {  
     onMovieBtnClick, 
     onTvBtnClick, 
@@ -114,27 +113,31 @@ class Header extends Component {
     searchMovieAndTv = (formValues) => {
        
         if (this.props.movieClick){
-           
-            this.props.searchMedia('movie', formValues)
-            this.props.searchRequest()
+            
+            this.props.searchMedia('movie', formValues);
+            this.props.searchRequest();
+           // this.props.history.push('/')
         }else if (this.props.tvClick){
+           
             this.props.searchRequest()
-            this.props.searchMedia('tv', formValues)
+            this.props.searchMedia('tv', formValues) 
+            //this.props.history.push('/')
         }
     }
 
     render() {
         return (
-                <div className="ui inverted top fixed menu" style = {{padding: '0 2rem'}}>
+                
+                <div className="ui mini inverted top fixed menu" >
                     {this.showSigningModal()}
                     <Link to = "/" className="item" >
                         <i className = "big purple film icon"></i>
                     </Link>
-                    <Link  to = "/" className={`item link ${this.props.movieClick?'active':null}`} onClick = {this.onMovieBtnClick} >
-                        Movies
+                    <Link  to = "/" className={` blue item ${this.props.movieClick?'active':null}`} onClick = {this.onMovieBtnClick} style ={{fontSize:'1.2rem'}}>
+                         All Movies
                     </Link>
-                    <Link to = "/" className={`item link ${this.props.tvClick?'active':null}`} onClick = {this.onTvBtnClick} >
-                        TV Shows
+                    <Link to = "/" className={`blue item  ${this.props.tvClick?'active':null}`} onClick = {this.onTvBtnClick} style ={{fontSize:'1.2rem'}} >
+                        All TV Shows
                     </Link>
                     <div className="right menu">
                         <div className="item">
@@ -166,6 +169,7 @@ const mapStateToProps = (state) => {
         signUpForm: state.auth.signUpForm
     }
 }
+
 
 export default connect(mapStateToProps, {
     onMovieBtnClick, 

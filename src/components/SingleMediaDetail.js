@@ -17,7 +17,7 @@ class SingleMediaDetail extends Component {
         this.props.fetchVideo(media_type, this.props.match.params.id)
         this.props.getAllFavourite()
         window.scrollTo(0, 0);
-        
+        this.checkIfAlreadyLiked()
     }
 
     componentDidUpdate(prevState){

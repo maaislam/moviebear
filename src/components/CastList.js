@@ -9,13 +9,13 @@ class CastList extends Component {
     
 
     renderList = () => {
-        return this.props.castList.slice(0, 10).map((castListItem) => {
+        return this.props.castList.slice(0, 10).map((castListItem, index) => {
             return (
                 <CastListItem
                     castName = {castListItem.name}
                     character = {castListItem.character}
                     castImage = {castListItem.profile_path}
-                    key = {castListItem.cast_id}
+                    key = {index}
                 />
             )
         })

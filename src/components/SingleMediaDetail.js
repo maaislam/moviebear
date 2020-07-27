@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import {  fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo  } from '../actions'
+import {  fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo, createFavourite,toggleSigningModal, getAllFavourite,favBtnClick, deleteFav,setFavourite, clearFavourite  } from '../actions'
 import './SingleMediaDetail.css'
 import TrailerModal from './TrailerModal';
 import CastList from './CastList'
@@ -15,17 +15,35 @@ class SingleMediaDetail extends Component {
         this.props.fetchSingleMedia(media_type, this.props.match.params.id)
         this.props.fetchCredit(media_type, this.props.match.params.id)
         this.props.fetchVideo(media_type, this.props.match.params.id)
+        this.props.getAllFavourite()
         window.scrollTo(0, 0);
-            
+        
     }
 
-    componentDidUpdate(prevProps) {
-        if (
-          this.props.location.pathname !== prevProps.location.pathname
-        ) {
-          window.scrollTo(0, 0);
+    componentDidUpdate(prevState){
+        this.checkIfAlreadyLiked()
+        if(!this.props.isSignedIn && prevState.isSignedIn){
+            this.props.clearFavourite()
         }
-      }
+    }
+
+
+    componentWillUnmount(){
+        this.props.clearFavourite()
+    }
+
+    checkIfAlreadyLiked = () => {
+
+        if( this.props.allFavourite.length>0  
+            && 
+            this.props.isSignedIn
+            &&
+            this.props.allFavourite.some( each => each.mediaId===this.props.mediaDetail.id && each.userId===this.props.signedUserId))
+        {
+            console.log('working')
+          this.props.setFavourite()  
+        }
+    }
 
 
     img_base_Url = () => {
@@ -102,6 +120,40 @@ class SingleMediaDetail extends Component {
         )
     }
 
+    addFavourite =() => {
+
+        if (this.props.isSignedIn){
+            
+            const media_type =  this.props.match.path ==="/movie/:id/:slug"?"movie":"tv";
+            
+            const userFav = {
+                mediaType:media_type,
+                mediaId:this.props.mediaDetail.id
+            }
+            
+           if( this.props.allFavourite  
+                && 
+                this.props.allFavourite.some( each => each.mediaId===userFav.mediaId && each.userId===this.props.signedUserId))//*delete if already liked
+                {
+                 console.log('present')
+                 //*find index of the item to delete
+                 const index =  this.props.allFavourite.findIndex(each => each.mediaId===userFav.mediaId && each.userId===this.props.signedUserId);
+                 
+                 const id = this.props.allFavourite[index].id
+                 this.props.deleteFav(id,index)
+                } else 
+                {
+                this.props.createFavourite(userFav)//*add to like if not aleady liked
+                }   
+
+
+            }else if (!this.props.isSignedIn) {
+                this.props.toggleSigningModal()
+            }
+            
+    }
+
+
     render() {
         return (
             <div style = {{marginTop:'3rem'}}>
@@ -120,9 +172,12 @@ class SingleMediaDetail extends Component {
                             <div className = {`ui ${this.checkRating()} label`}>
                                 <h4>{this.props.mediaDetail.vote_average}</h4>
                             </div>
-                            <button onClick={this.props.openTrailerModal} className = "ui inverted red button"><i className="play icon"></i>Play Trailer</button>
-                            <button  className = "ui inverted orange button"><i className="heart icon"></i>Add to favourite</button>
-                            <button  className = "ui inverted olive button"><i className="check icon"></i>Add to Watched List</button>
+                            <button onClick={this.props.openTrailerModal} className = "ui inverted red  button"><i className="play icon"></i>Play Trailer</button>
+                            <button 
+                                onClick ={this.addFavourite} 
+                                className = {`ui ${this.props.isFavourite?'':'inverted'} orange toggle button`}>
+                                <i className="heart icon"/>{`${this.props.isFavourite?'Added':'Add'} to Favourite`}
+                            </button>
                             
                         </div>
                         <div>
@@ -143,14 +198,20 @@ class SingleMediaDetail extends Component {
 
 const mapStateToProps = (state) => {
        
-
+    
     return {
         mediaTypeMovie:state.movies.movieBtnClick,
         mediaDetail:state.movies.singleMedia,
         castList: state.movies.castList,
         modal:state.movies.modals.trailerModal,
-        trailer:state.movies.trailer
+        trailer:state.movies.trailer,
+        user:state.auth.user,
+        isSignedIn:state.auth.isSignedIn,
+        allFavourite:state.favourite.allFavourite,
+        favBtnClicked: state.favourite.favBtnClicked,
+        signedUserId:state.auth.user.userId,
+        isFavourite:state.favourite.isFavourite
     }
 }
 
-export default connect(mapStateToProps, {fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo})(SingleMediaDetail);
+export default connect(mapStateToProps, {fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo, createFavourite, toggleSigningModal, getAllFavourite,favBtnClick, deleteFav,setFavourite, clearFavourite})(SingleMediaDetail);

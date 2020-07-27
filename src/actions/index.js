@@ -1,4 +1,7 @@
 import {movieDb} from '../api/movieDb'
+
+import users from '../api/users'
+
 import history from '../history'
 
 /**
@@ -193,3 +196,64 @@ export const searchRequest = () => {
 
 
 
+/**
+ * *for the purpose of storing user specific favourite and watched lsit
+ */
+export const favBtnClick = () => ({
+    type: 'FAV_BTN_CLICK', 
+});
+
+
+
+
+ export const createFavourite = (userFav) => {
+     
+     return async (dispatch, getState) => {
+
+        const {user} = getState().auth
+
+         const response = await users.post(`/favourites`, {...userFav, ...user});
+
+         
+ 
+         dispatch({type: 'CREATE_FAVOURITE', payload: response.data})
+     }
+     
+ };
+ export const getAllFavourite = () => {
+     
+     return async (dispatch) => {
+
+        
+
+         const response = await users.get(`/favourites`);
+
+        
+ 
+         dispatch({type: 'FETCH_ALL_FAVOURITE', payload: response.data})
+     }
+     
+ };
+ export const deleteFav = (id,index) => {
+     
+     return async (dispatch, getState) => {
+
+        console.log(id)
+        console.log(index)
+        const {allFavourite} = getState().favourite
+         await users.delete(`/favourites/${id}`);
+
+        const favs = [...allFavourite];
+        favs.splice(index, 1)
+ 
+         dispatch({type: 'DELETE_FAV', payload: favs})
+     }
+     
+ };
+
+ export const setFavourite = () => ({
+    type: 'SET_FAVOURITE'
+})
+ export const clearFavourite = () => ({
+    type: 'CLEAR_FAVOURITE'
+})

@@ -42,6 +42,14 @@ h1{
 .control-items{
     padding: 2rem 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1.5rem;
     
+    
+}
+
+.ui.inverted.orange.button:focus{
+    background-color: transparent !important;
+    box-shadow: 0 0 0 2px #ff851b inset !important;
+    color: #ff851b;
 }

@@ -14,7 +14,7 @@ class Auth extends Component {
   componentDidMount(){
 
     this.authListener();
- 
+    
   }
  
  
@@ -26,10 +26,12 @@ class Auth extends Component {
         //console.log(user)
         var signedUser = {
           name: user.displayName,
-          userImg:user.photoURL
+          userImg:user.photoURL,
+          userId:user.uid
         }
 
         this.props.userSignedIn(signedUser);
+        
         } 
         else {
               // No user is signed in.
@@ -97,6 +99,11 @@ class Auth extends Component {
                 
               }).then(()=>{
                 this.authListener();
+                  /**
+                   ** create an user object with empty favourite and watched list
+                   */
+                  this.props.createUser(this.props.userDetail)
+
                 if (this.props.signInModal){
                   this.props.toggleSigningModal()
                 }
@@ -138,7 +145,8 @@ const mapStateToProps = (state) => {
     isSignedIn: state.auth.isSignedIn,
     googleSignIn:state.auth.googleSignInReq,
     facebookSignIn:state.auth.facebookSignInReq,
-    signInModal:state.movies.modals.signingModal
+    signInModal:state.movies.modals.signingModal,
+    user:state.auth.user
   }
 }
 

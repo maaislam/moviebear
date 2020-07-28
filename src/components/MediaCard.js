@@ -13,11 +13,12 @@ class MediaCard extends Component {
 
     findGenreFromIdOrName = () => {
         
-        if (this.props.genreArr[0].name) {
+        if (this.props.genreArr[0] !==undefined && this.props.genreArr[0].name) {
+            console.log(this.props.genreArr)
             return this.props.genreArr.map((item,index)=> {
                     
                 return (
-                    <span className="item" key= {index}>
+                    <span className ="comma" key= {index}>
                         {item.name}
                     </span>
                 )

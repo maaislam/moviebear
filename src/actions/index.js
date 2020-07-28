@@ -220,26 +220,12 @@ export const favBtnClick = () => ({
      }
      
  };
- export const getAllFavourite = () => {
-     
-     return async (dispatch) => {
 
-        
-
-         const response = await users.get(`/favourites`);
-
-        
- 
-         dispatch({type: 'FETCH_ALL_FAVOURITE', payload: response.data})
-     }
-     
- };
  export const deleteFav = (id,index) => {
      
      return async (dispatch, getState) => {
 
-        console.log(id)
-        console.log(index)
+        
         const {allFavourite} = getState().favourite
          await users.delete(`/favourites/${id}`);
 
@@ -257,3 +243,20 @@ export const favBtnClick = () => ({
  export const clearFavourite = () => ({
     type: 'CLEAR_FAVOURITE'
 })
+
+
+
+export const getCurrentUserFavs = (userId) => {
+    
+    return async (dispatch) => {
+
+        const response = await users.get(`/favourites`,{
+            params:{
+                q:userId
+            }
+        });
+        console.log(response)
+        dispatch({type:'FETCH_ALL_FAVOURITE', payload:response.data})
+    }
+    
+};

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { userSignedIn, userSignedOut, toggleSigningModal} from '../../actions'
 
 import {fire, googleProvider, facebookProvider} from './Fire'
+import { Link } from 'react-router-dom';
 
 
 
@@ -48,9 +49,18 @@ class Auth extends Component {
 
       if (this.props.isSignedIn){
         return(
-          <button className = "ui red button" onClick = {this.logout}>
-            Sign Out
-          </button>
+          <div className = "ui grid"> 
+            <div className = "eight wide column">
+              <Link to = "/favourites" className = "ui violet button">
+                Favourites
+              </Link>
+            </div>
+            <div className = "eight wide column">
+              <button className = "ui red button" onClick = {this.logout}>
+                Sign Out
+              </button>
+            </div> 
+          </div>
           )
       } else if (this.props.isSignedIn===false) {
         return (

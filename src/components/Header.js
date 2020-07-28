@@ -104,7 +104,10 @@ class Header extends Component {
     showUserSnippet = () =>{
         if (this.props.isSignedIn){
             return (
-            <UserSnippet name ={this.props.userName} userImg = {this.props.userImg}/>
+            <>
+                <UserSnippet name ={this.props.userName} userImg = {this.props.userImg}/>
+               
+            </>
             )
         }
         

@@ -7,7 +7,7 @@ import {Router, Route, Switch } from 'react-router-dom'
 import SingleMediaDetail from './SingleMediaDetail'
 import Header from './Header'
 import LandingPage from './LandingPage';
-
+import FavList from './FavList'
 import history from '../history'
 
 class App extends Component {
@@ -25,6 +25,7 @@ class App extends Component {
                         <Route path = "/" exact component = {LandingPage}/>
                         <Route path = "/movie/:id/:slug" exact component = {SingleMediaDetail}/>
                         <Route path = "/tv/:id/:slug" exact component = {SingleMediaDetail}/>
+                        <Route path = "/favourites" exact component = {FavList}/>
                     </Switch>
                     </>
                 </Router>

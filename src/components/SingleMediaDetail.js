@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import {  fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo, createFavourite,toggleSigningModal, getAllFavourite,favBtnClick, deleteFav,setFavourite, clearFavourite  } from '../actions'
+import {  fetchSingleMedia, 
+          fetchCredit, 
+          openTrailerModal, 
+          fetchVideo, 
+          createFavourite,
+          toggleSigningModal, 
+          getCurrentUserFavs,
+          favBtnClick, 
+          deleteFav,
+          setFavourite, 
+          clearFavourite  } from '../actions'
+
 import './SingleMediaDetail.css'
 import TrailerModal from './TrailerModal';
 import CastList from './CastList'
@@ -15,7 +26,12 @@ class SingleMediaDetail extends Component {
         this.props.fetchSingleMedia(media_type, this.props.match.params.id)
         this.props.fetchCredit(media_type, this.props.match.params.id)
         this.props.fetchVideo(media_type, this.props.match.params.id)
-        this.props.getAllFavourite()
+        
+        if (this.props.isSignedIn && this.props.user.userId){
+            this.props.getCurrentUserFavs(this.props.user.userId)
+        }
+
+        
         window.scrollTo(0, 0);
         this.checkIfAlreadyLiked()
     }
@@ -126,16 +142,22 @@ class SingleMediaDetail extends Component {
             
             const media_type =  this.props.match.path ==="/movie/:id/:slug"?"movie":"tv";
             
+
+            //*Details to store when user favoutites a movie or tv
             const userFav = {
                 mediaType:media_type,
-                mediaId:this.props.mediaDetail.id
+                mediaId:this.props.mediaDetail.id,
+                mediaTitle:this.props.mediaDetail.title,
+                mediaName:this.props.mediaDetail.Name,
+                poster: this.props.mediaDetail.genre_ids,
+                rating: this.props.mediaDetail.vote_average
             }
             
            if( this.props.allFavourite  
                 && 
                 this.props.allFavourite.some( each => each.mediaId===userFav.mediaId && each.userId===this.props.signedUserId))//*delete if already liked
                 {
-                 console.log('present')
+                 
                  //*find index of the item to delete
                  const index =  this.props.allFavourite.findIndex(each => each.mediaId===userFav.mediaId && each.userId===this.props.signedUserId);
                  
@@ -198,7 +220,7 @@ class SingleMediaDetail extends Component {
 
 const mapStateToProps = (state) => {
        
-    
+    console.log(state.movies.singleMedia)
     return {
         mediaTypeMovie:state.movies.movieBtnClick,
         mediaDetail:state.movies.singleMedia,
@@ -214,4 +236,16 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {fetchSingleMedia, fetchCredit, openTrailerModal, fetchVideo, createFavourite, toggleSigningModal, getAllFavourite,favBtnClick, deleteFav,setFavourite, clearFavourite})(SingleMediaDetail);
+export default connect(mapStateToProps, {
+        
+        fetchSingleMedia, 
+        fetchCredit, 
+        openTrailerModal, 
+        fetchVideo, 
+        createFavourite, 
+        toggleSigningModal, 
+        getCurrentUserFavs,
+        favBtnClick, 
+        deleteFav,
+        setFavourite, 
+        clearFavourite})(SingleMediaDetail);

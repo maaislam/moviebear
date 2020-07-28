@@ -6,6 +6,7 @@ import {Router, Route, Switch } from 'react-router-dom'
 //import TvShow from './TvShow'
 import SingleMediaDetail from './SingleMediaDetail'
 import Header from './Header'
+import Footer from './Footer'
 import LandingPage from './LandingPage';
 import FavList from './FavList'
 import history from '../history'
@@ -27,6 +28,7 @@ class App extends Component {
                         <Route path = "/tv/:id/:slug" exact component = {SingleMediaDetail}/>
                         <Route path = "/favourites" exact component = {FavList}/>
                     </Switch>
+                    <Footer/>
                     </>
                 </Router>
                 

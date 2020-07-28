@@ -255,7 +255,7 @@ export const getCurrentUserFavs = (userId) => {
                 q:userId
             }
         });
-        console.log(response)
+       
         dispatch({type:'FETCH_ALL_FAVOURITE', payload:response.data})
     }
     

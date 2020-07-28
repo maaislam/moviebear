@@ -56,7 +56,7 @@ class SingleMediaDetail extends Component {
             &&
             this.props.allFavourite.some( each => each.mediaId===this.props.mediaDetail.id && each.userId===this.props.signedUserId))
         {
-            console.log('working')
+           
           this.props.setFavourite()  
         }
     }
@@ -147,10 +147,13 @@ class SingleMediaDetail extends Component {
             const userFav = {
                 mediaType:media_type,
                 mediaId:this.props.mediaDetail.id,
-                mediaTitle:this.props.mediaDetail.title,
-                mediaName:this.props.mediaDetail.Name,
-                poster: this.props.mediaDetail.genre_ids,
-                rating: this.props.mediaDetail.vote_average
+                movie_title:this.props.mediaDetail.original_title,
+                tv_name:this.props.mediaDetail.original_name,
+                genres: this.props.mediaDetail.genres,
+                vote_average: this.props.mediaDetail.vote_average,
+                poster_path: this.props.mediaDetail.poster_path,
+                release_date:this.props.mediaDetail.release_date,
+                first_air_date:this.props.first_air_date
             }
             
            if( this.props.allFavourite  
@@ -220,7 +223,7 @@ class SingleMediaDetail extends Component {
 
 const mapStateToProps = (state) => {
        
-    console.log(state.movies.singleMedia)
+    
     return {
         mediaTypeMovie:state.movies.movieBtnClick,
         mediaDetail:state.movies.singleMedia,

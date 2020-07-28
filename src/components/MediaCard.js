@@ -11,9 +11,18 @@ class MediaCard extends Component {
     }
 
 
-    findGenre = () => {
+    findGenreFromIdOrName = () => {
         
-                
+        if (this.props.genreArr[0].name) {
+            return this.props.genreArr.map((item,index)=> {
+                    
+                return (
+                    <span className="item" key= {index}>
+                        {item.name}
+                    </span>
+                )
+            });
+        }   else{
                 return this.props.genreArr.map((item, index)=> {
                   const genre = this.props.fullGenreList.find(el => el.id===item);
                  return (
@@ -23,6 +32,7 @@ class MediaCard extends Component {
                  )  
                 
             });
+        } 
     }
 
     checkRating = () => {
@@ -37,6 +47,7 @@ class MediaCard extends Component {
 
 
     urlModifier = () => {
+        
         return  this.props.title.split(' ').join('-');
         
            
@@ -46,7 +57,7 @@ class MediaCard extends Component {
     render() {
         return (
            
-                <Link  to = {`/${this.props.clickedItem}/${this.props.media_id}/${this.urlModifier()}`} className="card media-card">
+                <Link  to = {`/${this.props.mediaType?this.props.mediaType:this.props.clickedItem}/${this.props.media_id}/${this.urlModifier()}`} className="card media-card">
                     <div className="image ">
                         <img src={this.img_base_Url()} alt ={this.props.title}/>
                     </div>
@@ -58,7 +69,7 @@ class MediaCard extends Component {
                         <div className="date">Release Date: {this.props.release_date}</div>
                      
                         <div className=" genre">
-                            {this.findGenre()}
+                            {this.findGenreFromIdOrName()}
                         </div>
                     </div>
                 </Link>    

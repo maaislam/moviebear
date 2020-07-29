@@ -1,11 +1,12 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
-import { userSignedIn, userSignedOut, toggleSigningModal} from '../../actions'
-
 import {fire, googleProvider, facebookProvider} from './Fire'
 import { Link } from 'react-router-dom';
+
+import { userSignedIn, userSignedOut, toggleSigningModal} from '../../actions'
+import history from '../../history'
+
 
 
 
@@ -131,8 +132,8 @@ class Auth extends Component {
 
     }
 
-    logout() {
-      fire.auth().signOut();
+    logout = () => {
+      fire.auth().signOut().then(()=>history.push('/'));
 
     }
 

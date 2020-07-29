@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import {  Link  } from 'react-router-dom'
+
 import {  
     onMovieBtnClick, 
     onTvBtnClick, 
@@ -12,11 +14,8 @@ import {
     searchMedia,
     searchRequest} from '../actions';
 
-
-
 import TrailerModal from './TrailerModal';
 
-import {  Link  } from 'react-router-dom'
 import LogInForm from './auth/LogInForm';
 import Auth from './auth/Auth';
 import UserSnippet from './UserSnippet';

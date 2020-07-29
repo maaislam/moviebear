@@ -35,7 +35,7 @@ export default (state = initialState, { type, payload }) => {
 
 
     case 'MEDIA_SEARCH':
-        return { ...state, searchResult:[ ...payload], searchRequest:true};
+        return { ...state, searchResult:[ ...payload], searchRequest:true, singleMedia:{}};
 
     /************************************************************* */
     case 'MOVIE_BTN_CLICK':

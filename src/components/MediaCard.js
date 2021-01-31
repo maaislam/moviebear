@@ -46,7 +46,6 @@ class MediaCard extends Component {
   };
 
   urlModifier = () => {
-    console.log(encodeURIComponent(this.props.title));
     var encodedURL = encodeURIComponent(this.props.title);
     return encodedURL.split(' ').join('-');
   };
